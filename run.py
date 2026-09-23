@@ -261,7 +261,7 @@ def main():
 
     # score
     p_score = sub.add_parser("score", help="Score pools with Jev AI")
-    p_score.add_argument("--top-n", type=int, help="Score top N pools")
+    p_score.add_argument("--top-n", "--limit", type=int, help="Score top N pools")
     p_score.add_argument("--min-tvl", type=float, help="Minimum TVL filter")
 
     # rank
