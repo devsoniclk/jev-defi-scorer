@@ -1,0 +1,38 @@
+# DeFi Yield Scorer Configuration
+
+scanner:
+  # DeFiLlama yields endpoint
+  base_url: "https://yields.llama.fi"
+  endpoint: "/pools"
+  timeout: 30
+
+  # Pool filters (applied after fetch)
+  min_tvl: 100000          # $100K minimum TVL
+  min_apy: 0.5             # 0.5% minimum APY
+  max_apy: 500             # 500% max APY (filter obvious scams)
+  # Chains to include (empty = all)
+  chains: []
+  # Projects to exclude
+  exclude_projects: []
+
+jev:
+  model: "typesafe/jev-1.13"
+  # Max concurrent Jev requests
+  concurrency: 5
+
+scoring:
+  # How many top pools to score (0 = all filtered)
+  top_n: 20
+  # Default sort field for ranking
+  rank_by: "composite_score"
+  # Weights for composite score (sum to 1.0)
+  weights:
+    deposit_score: 0.35
+    risk_tier: 0.30       # lower tier = better
+    rug_probability: 0.20 # lower = better
+    il_risk: 0.15         # lower = better
+
+logging:
+  jsonl_path: "data/scores.jsonl"
+  # Keep last N entries per pool
+  max_history_per_pool: 100
