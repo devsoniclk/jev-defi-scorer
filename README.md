@@ -2,6 +2,30 @@
 
 AI-scored DeFi yield opportunities using [Jev](https://openrouter.ai/alpha/jev) typed decisions via OpenRouter. Fetches live yield data from [DeFiLlama](https://defillama.com/) and scores each pool on risk, deposit attractiveness, rug probability, and impermanent loss.
 
+
+## 📊 Scoring & Audit Pipeline
+
+```mermaid
+flowchart LR
+    Protocols["DeFi Protocols
+(Aave, Compound, Uniswap, Curve)"] --> Scraper["On-Chain Scraper
+(TVL, Yield, APY, Lockup)"]
+    
+    subgraph AuditSuite ["Quant Risk & Yield Scoring"]
+        ContractAudit["Smart Contract Risk Engine
+(Audits, Age, Admin Keys)"]
+        YieldSustainability["Yield Sustainability Model
+(Incentive Dilution Analysis)"]
+        ImpermanentLoss["Impermanent Loss & Liquidity Depth"]
+    end
+
+    Scraper --> AuditSuite
+    AuditSuite --> Scorecard["Risk-Adjusted DeFi Scorecard
+(0-100 Rating & Allocation Targets)"]
+```
+
+---
+
 ## Architecture
 
 ```
